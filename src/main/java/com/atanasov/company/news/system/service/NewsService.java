@@ -3,6 +3,7 @@ package com.atanasov.company.news.system.service;
 import com.atanasov.company.news.system.model.News;
 import com.atanasov.company.news.system.repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -31,9 +32,11 @@ public class NewsService {
     public void updateNews(News news){
         newsRepository.save(news);
     }
-
-//    public List<News> sortByDate(LocalDate date) {
-//        return newsRepository.sortByDate(date);
-//    }
+    public List<News> findAllNewsByDate(LocalDate date){
+        return newsRepository.findAll(Sort.by("date").descending());
+    }
+    public List<News> findAllNewsByTitle(String title){
+        return newsRepository.findAllByTitle(title);
+    }
 
 }
